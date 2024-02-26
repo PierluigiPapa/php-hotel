@@ -16,6 +16,7 @@
         <div class="d-flex justify-content-center">
             <div class="py-4">
                 <div class="mb-3">
+                    <!-- // SECTION FORM // -->
                     <form action="hotels.php" method="GET">
                         <div class="form-group py-3">
                           <label for="parkingCheckbox" class="fw-bold">Parcheggio</label>
@@ -25,10 +26,12 @@
                           <label for="ratingInput" class="fw-bold">Voto:</label>
                           <input type="number" id="ratingInput" name="rating" min="1" max="5" value="<?php echo isset($_GET['rating']) ? $_GET['rating'] : ''; ?>">
                         </div>
+
                         <div class="text-center py-3">
                             <button type="submit" class="btn btn-dark">Filtra</button>
                         </div>
                     </form>
+                    <!-- // SECTION FORM // -->
                 </div>
             </div>
         </div>
