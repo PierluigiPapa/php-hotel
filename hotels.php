@@ -78,7 +78,6 @@
             $filteredHotels[] = $hotel;
           }
         }
-        
         return $filteredHotels;
       }
       
