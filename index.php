@@ -15,8 +15,22 @@
 
     <div class="d-flex justify-content-center">
         <div class="py-4">
+            <div class="mb-3">
+                <form action="hotels.php" method="GET">
+                    <div class="form-group">
+                        <label for="parkingCheckbox">Parcheggio</label>
+                        <input type="checkbox" id="parkingCheckbox" name="parking" <?php if(isset($_GET['parking'])) echo "checked"; ?>>
+                    </div>
+                    <div class="form-group my-4">
+                        <label for="ratingInput">Voto:</label>
+                        <input type="number" id="ratingInput" name="rating" min="1" max="5" value="<?php echo isset ($_GET['rating']) ? $_GET['rating'] : ''; ?>">
+                    </div>
 
-            
+                    <div class="text-center my-4">
+                        <button type="button" class="btn btn-primary">Filtra</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
