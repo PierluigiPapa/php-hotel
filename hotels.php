@@ -1,50 +1,3 @@
-<?php
-
-    $hotels = [
-
-        [
-            'name' => 'Hotel Belvedere',
-            'description' => 'Hotel Belvedere Descrizione',
-            'parking' => true,
-            'vote' => 4,
-            'distance_to_center' => 10.4
-        ],
-
-        [
-            'name' => 'Hotel Futuro',
-            'description' => 'Hotel Futuro Descrizione',
-            'parking' => true,
-            'vote' => 2,
-            'distance_to_center' => 2
-        ],
-
-        [
-            'name' => 'Hotel Rivamare',
-            'description' => 'Hotel Rivamare Descrizione',
-            'parking' => false,
-            'vote' => 1,
-            'distance_to_center' => 1
-        ],
-
-        [
-            'name' => 'Hotel Bellavista',
-            'description' => 'Hotel Bellavista Descrizione',
-            'parking' => false,
-            'vote' => 5,
-            'distance_to_center' => 5.5
-        ],
-
-        [
-            'name' => 'Hotel Milano',
-            'description' => 'Hotel Milano Descrizione',
-            'parking' => true,
-            'vote' => 2,
-            'distance_to_center' => 50
-        ],
-
-    ];
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,38 +11,83 @@
 <body class="bg-warning">
 
 <div class="container">
-    <h1 class="text-center my-4 text-dark">DATI HOTEL</h1>
-    
-    <!-- // SECTION TABELLA // -->
-    <div class="d-flex justify-content-center">
-        <div class="py-4 m-4">
-            <table class="table text-center border border-4 border-dark table-secondary">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Descrizione</th>
-                    <th scope="col">Parcheggio</th>
-                    <th scope="col">Voto</th>
-                    <th scope="col">Distanza dal centro</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <?php foreach ($hotels as $index => $hotel) : ?>
-                    <tr>
-                      <th scope="row"><?php echo $index + 1; ?></th>
-                      <td><?php echo $hotel['name']; ?></td>
-                      <td><?php echo $hotel['description']; ?></td>
-                      <td><?php echo $hotel['parking'] ? 'Sì' : 'No'; ?></td>
-                      <td><?php echo $hotel['vote']; ?></td>
-                      <td><?php echo $hotel['distance_to_center']; ?> km</td>
-                    </tr>
-                  <?php endforeach; ?>
-                </tbody>
-              </table>
-        </div>
-    </div>
-    <!-- // SECTION TABELLA // -->
+  <h1 class="text-center text-dark mb-4">LISTA DEGLI HOTEL</h1>
+  <table class="table mt-3">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Descrizione</th>
+        <th>Parcheggio</th>
+        <th>Voto</th>
+        <th>Distanza dal centro</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      $hotels = [
+        [
+          'name' => 'Hotel Belvedere',
+          'description' => 'Hotel Belvedere Descrizione',
+          'parking' => true,
+          'vote' => 4,
+          'distance_to_center' => 10.4
+        ],
+        [
+          'name' => 'Hotel Futuro',
+          'description' => 'Hotel Futuro Descrizione',
+          'parking' => true,
+          'vote' => 2,
+          'distance_to_center' => 2
+        ],
+        [
+          'name' => 'Hotel Rivamare',
+          'description' => 'Hotel Rivamare Descrizione',
+          'parking' => false,
+          'vote' => 1,
+          'distance_to_center' => 1
+        ],
+        [
+          'name' => 'Hotel Bellavista',
+          'description' => 'Hotel Bellavista Descrizione',
+          'parking' => false,
+          'vote' => 5,
+          'distance_to_center' => 5.5
+        ],
+        [
+          'name' => 'Hotel Milano',
+          'description' => 'Hotel Milano Descrizione',
+          'parking' => true,
+          'vote' => 2,
+          'distance_to_center' => 50
+        ]
+      ];
+
+      function filterHotels($hotels, $parking, $rating) {
+        $filteredHotels = [];
+
+        foreach ($hotels as $hotel) {
+          if ((!$parking || $hotel['parking']) && $hotel['vote'] >= $rating) {
+            $filteredHotels[] = $hotel;
+          }
+        }
+
+        return $filteredHotels;
+      }
+
+      $filteredHotels = isset($_GET['parking']) || isset($_GET['rating']) ? filterHotels($hotels, isset($_GET['parking']), isset($_GET['rating']) ? $_GET['rating'] : 1) : $hotels;
+
+      foreach ($filteredHotels as $hotel) {
+        echo "<tr>";
+        echo "<td>{$hotel['name']}</td>";
+        echo "<td>{$hotel['description']}</td>";
+        echo "<td>" . ($hotel['parking'] ? 'Sì' : 'No') . "</td>";
+        echo "<td>{$hotel['vote']}</td>";
+        echo "<td>{$hotel['distance_to_center']} km</td>";
+        echo "</tr>";
+      }
+      ?>
+    </tbody>
+  </table>
 </div>
 
 <!-- LINK JAVASCRIPT BOOTSTRAP -->
