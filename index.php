@@ -18,11 +18,11 @@
                 <div class="mb-3">
                     <form action="hotels.php" method="GET">
                         <div class="form-group py-3">
-                          <label for="parkingCheckbox">Parcheggio</label>
+                          <label for="parkingCheckbox" class="fw-bold">Parcheggio</label>
                           <input type="checkbox" id="parkingCheckbox" name="parking" <?php if(isset($_GET['parking'])) echo "checked"; ?>>
                         </div>
                         <div class="form-group py-3">
-                          <label for="ratingInput">Voto:</label>
+                          <label for="ratingInput" class="fw-bold">Voto:</label>
                           <input type="number" id="ratingInput" name="rating" min="1" max="5" value="<?php echo isset($_GET['rating']) ? $_GET['rating'] : ''; ?>">
                         </div>
                         <div class="text-center py-3">
